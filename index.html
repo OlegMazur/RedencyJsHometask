@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Hometask1</title>
+	<link rel="stylesheet" href="main.css" />
+</head>
+
+<body>
+	<main>
+
+		<div id="flex-wrapper">
+			<header>
+				<div>Name</div>
+				<div>Created</div>
+				<div>Category</div>
+				<div>Content</div>
+				<div>Dates</div>
+				<div class="header-icon">
+					<ion-icon name="archive"></ion-icon>
+					<ion-icon name="trash"></ion-icon>
+				</div>
+			</header>
+			<div class="todos-wrapper" id="todos-list">
+
+			</div>
+			<button id="create-note-btn" type="button">Create note</button>
+			<div class="add-todo-wraper" id="add-todo-wrapper" hidden>
+
+                <div>
+					<div class="input-wrapper"> <input type="text" id="description-task" placeholder="Name"></div>
+					<div class="input-wrapper"> <input type="text" id="name-task" placeholder="Content"></div>
+	
+					<div>
+						<span>Select Category</span>
+						<select id="selectedCategory">
+							<option value="Task">Task</option>
+							<option value="Random Thougth">Random Thougth </option>
+							<option value="Idea">Idea</option>
+							<option value="Quote">Quote</option>
+						</select>
+					</div>
+	
+					<div class="button-wrapper">
+						<button id="add-task-btn" type="button">Додати</button>
+					</div>
+	
+				</div>
+				
+			</div>
+
+		</div>
+
+	</main>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	<script src="main.js"></script>
+</body>
+
+</html>

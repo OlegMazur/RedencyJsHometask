@@ -1,0 +1,116 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+	font-family: "Fira sans", sans-serif;
+}
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	font-size: large;
+	color: rgb(10, 10, 10);
+	
+}
+main {
+	flex: 1 1 0%;
+	background-color: #f0f3f5;
+	max-width: 800px;
+	width: 100%;
+	margin: 0 auto;
+}
+.todos-wrapper{
+	min-height: 200px;
+}
+.todo-item{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 50px;
+	background-color: #dcdcdc;
+    margin-bottom: 10px;
+	overflow: hidden;
+}
+.todo-item>div{
+    flex: 1 1 100px;
+	display: flex;
+    justify-content: flex-start;
+	overflow: hidden;
+	margin: 10px;
+}
+.item-name{
+	display: flex;
+	align-items: center;
+}
+.item-icon{
+	width: 30px;
+	height: 30px;
+	display: flex;
+	flex-shrink: 0;
+	justify-content: center;
+	align-items: center;
+	color: rgb(247, 248, 248);
+	background-color:#696969 ;
+	border-radius: 50%;
+}
+
+.item-icon:hover{
+	opacity: 0.5;
+	background-color: gold;
+}
+.item-icon:active{
+	opacity: 0.5;
+	background-color: gold;
+}
+header {
+	display: flex;
+	justify-content: space-between ;
+	padding: 10px;
+	background-color:#808080 ;
+	color: #FFF;
+	font-size: large;
+	
+	width: 100%;
+	margin: 0 auto;
+	margin-bottom: 10px;
+}
+header>div{
+	display: flex;
+	flex: 1 1 100px;
+}
+.header-icon{
+    display: flex;
+	justify-content: end;
+	margin-left: 10px;
+}
+input, button {
+	appearance: none;
+	border: none;
+	outline: none;
+	background: none;
+}
+
+.input-wrapper input {
+	
+	
+	padding: 1rem;
+	border-radius: 1rem;
+	margin-right: 1rem;
+	
+	font-size: 1.25rem;
+}
+.todo-item .buttons {
+	
+	display: flex;
+	justify-content: flex-end;
+	height: 30px;
+}
+
+.buttons button{
+	height: 30px;
+} 
+button .btn-delete{
+	height: 30px;
+}
+.add-todo-wraper>div{
+	display: flex;
+}
