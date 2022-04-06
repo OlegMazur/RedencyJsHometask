@@ -18,37 +18,51 @@
 				<div>Content</div>
 				<div>Dates</div>
 				<div class="header-icon">
-					<ion-icon name="archive"></ion-icon>
+					<button id="header-archive-btn" class="header-archive-btn" type="button" ><ion-icon name="archive"></ion-icon></button>
+					
 					<ion-icon name="trash"></ion-icon>
 				</div>
 			</header>
+			
 			<div class="todos-wrapper" id="todos-list">
 
 			</div>
-			<button id="create-note-btn" type="button">Create note</button>
+			<div class="create-note-wrapper" ><button class="create-note-btn" id="create-note-btn" type="button">Create note</button></div>
+			
 			<div class="add-todo-wraper" id="add-todo-wrapper" hidden>
 
-                <div>
-					<div class="input-wrapper"> <input type="text" id="description-task" placeholder="Name"></div>
-					<div class="input-wrapper"> <input type="text" id="name-task" placeholder="Content"></div>
+                <div class="create-task-wrapper">
+					<div class="input-wrapper"> <input type="text" id="task-name" placeholder="Name"></div>
+					<div class="input-wrapper"> <input type="text" id="task-content" placeholder="Content"></div>
 	
 					<div>
 						<span>Select Category</span>
-						<select id="selectedCategory">
-							<option value="Task">Task</option>
-							<option value="Random Thougth">Random Thougth </option>
-							<option value="Idea">Idea</option>
-							<option value="Quote">Quote</option>
+						<select id="selectedCategory" class="selectedCategory">
+							<option value="task">Task</option>
+							<option value="randomThougth">Random Thougth </option>
+							<option value="idea">Idea</option>
+							<option value="quote">Quote</option>
 						</select>
 					</div>
-	
+	                
 					<div class="button-wrapper">
-						<button id="add-task-btn" type="button">Додати</button>
+						<button id="add-task-btn" class="add-task-btn" type="button">Add task</button>
 					</div>
 	
 				</div>
 				
 			</div>
+			<footer>
+				<div class="footerWraper">
+					<div>Note Category</div>
+					<div>Active</div>
+					<div>Archived</div>
+				</div>
+				<div class="footer-content" id="footer-content">
+					
+
+				</div>
+			</footer>
 
 		</div>
 
