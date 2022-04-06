@@ -67,17 +67,14 @@ let tasks = [
 		icon: iconsList.task,
 		active: true,
 	},
-
 ];
 let archiveTasks = []
-
 let resultFind = [];
 function addArchiveTask() {
 	archiveTasks = tasks.filter(item => item.active == !true)
-
 }
 function formatText(text) {
-	let newText = text.slice(0, 16)+"..."
+	let newText = text.slice(0, 16) + "..."
 	if (text.length > 20) {
 		return newText
 	}
@@ -85,8 +82,6 @@ function formatText(text) {
 }
 function archivedTask(index) {
 	tasks[index].active = !tasks[index].active
-
-
 	if (!tasks[index].active) {
 		fillHtmlList()
 	}
@@ -94,9 +89,7 @@ function archivedTask(index) {
 		fillHtmlArchivedList()
 	}
 	addFooterContent()
-
 }
-
 function fillHtmlArchivedList() {
 	todosList.innerHTML = " ";
 	tasks.forEach((item, index) => {
@@ -104,13 +97,9 @@ function fillHtmlArchivedList() {
 			todosList.innerHTML += createTemplate(item, index);
 		}
 	});
-
-
 }
 let search = () => {
-
 	return tasks.forEach((item) => {
-
 		let findTask = tasks.find(item => item.category == "task")
 		let findIdea = tasks.find(item => item.category == "idea")
 		let findQuote = tasks.find(item => item.category == "quote")
@@ -118,7 +107,6 @@ let search = () => {
 		if (item.category == "task" && !resultFind.includes(findTask)) {
 			resultFind.push(item)
 		};
-
 		if (item.category == "idea" && !resultFind.includes(findIdea)) {
 			resultFind.push(item)
 		};
@@ -128,11 +116,9 @@ let search = () => {
 		if (item.category == "randomThougth" && !resultFind.includes(findRandomThougth)) {
 			resultFind.push(item)
 		};
-
 	})
 }
 function Task(content, category, editDate = "", name, icon, active = true) {
-
 	this.name = name;
 	this.content = content;
 	this.created = new Date;
@@ -148,18 +134,13 @@ function transformDate(date) {
 }
 function searchTasksLength(category, active) {
 	let result = tasks.filter(item => item.category == category && item.active == active).length
-
 	return result
-
 }
 function createFooterTamplate(task) {
-
 	let actTask = searchTasksLength(task.category, true)
 	let archiTask = searchTasksLength(task.category, false)
-	
 	return `
-	    
-		    <div class="footer-item">
+	    <div class="footer-item">
 	                <div class="footer-item-name">
 								<div class="item-icon">${task.icon}</div>
 								<div>${task.category}</div>
@@ -170,12 +151,10 @@ function createFooterTamplate(task) {
 					</div>
 					
 			</div>
-	        
-	`
+	    `
 }
 function addFooterContent() {
 	footerContent.innerHTML = "";
-
 	resultFind.forEach((item) => {
 		footerContent.innerHTML += createFooterTamplate(item)
 
@@ -183,8 +162,7 @@ function addFooterContent() {
 
 }
 const createTemplate = (task, index) => {
-    let content=formatText(task.content)
-
+	let content = formatText(task.content)
 	return `
 	<div class="todo-item">
 	    <div class="item-name">
@@ -215,26 +193,19 @@ const createTemplate = (task, index) => {
 }
 
 function editTask(index) {
-
 	let editStatus = tasks[index].editStatus
-
 	if (!editStatus) {
 		let newContent = (document.getElementById("item-content" + index))
-
 		newContent.innerHTML = ` <input   id="inputValue" value="${tasks[index].content}">`
 		tasks[index].editStatus = !tasks[index].editStatus
 	}
 	if (editStatus) {
 		addNewTaskText(index)
 		tasks[index].editStatus = !tasks[index].editStatus
-
 	}
-
-
 }
 function addNewTaskText(index) {
 	let newText = (document.getElementById("inputValue"))
-
 	tasks[index].content = newText.value
 	tasks[index].editDate = transformDate(tasks[index].created) + " ," + transformDate(new Date)
 	newText.value = ""
@@ -261,7 +232,6 @@ addTaskBtn.addEventListener('click', () => {
 	console.log(tasks.filter(item => item.category == "task").length);
 	console.log(tasks)
 })
-
 function createNewNote() {
 	addTodoWrapper.hidden = !addTodoWrapper.hidden;
 }
@@ -272,18 +242,16 @@ const deleteTask = index => {
 }
 createNoteBtn.addEventListener('click', () => {
 	createNewNote()
-
 })
 showArchived.addEventListener("click", () => {
-
 	visibleArchive.visible = !visibleArchive.visible
 	if (visibleArchive.visible) {
 		fillHtmlArchivedList();
-        showArchived.className="header-archive-btn-black"
+		showArchived.className = "header-archive-btn-black"
 	}
 	else {
 		fillHtmlList()
-        showArchived.className="header-archive-btn"
+		showArchived.className = "header-archive-btn"
 	}
 })
 search()
