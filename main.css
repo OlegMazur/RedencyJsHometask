@@ -196,3 +196,8 @@ input, button {
   .edit-date{
 	font-size: medium;
 }
+#inputValue{
+	background-color: #eeebeb;
+	height: 30px;
+	font-size: medium;
+}
