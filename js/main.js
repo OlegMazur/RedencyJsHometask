@@ -5,11 +5,10 @@ const todosList = document.getElementById('todos-list');
 const selectedCategory = document.getElementById('selectedCategory');
 const addTodoWrapper = document.getElementById('add-todo-wrapper');
 const taskInputName = document.getElementById('task-name');
-const footerContent = document.getElementById('footer-content')
-const showArchived = document.getElementById('header-archive-btn')
-const listNameActive = document.getElementById('list-name-active')
+const footerContent = document.getElementById('footer-content');
+const showArchived = document.getElementById('header-archive-btn');
+const listNameActive = document.getElementById('list-name-active');
 const listNameArchive = document.getElementById('list-name-archive')
-
 const iconsList = {
 	task: '<ion-icon name="cart-outline"></ion-icon>',
 	randomThougth: '<ion-icon name="chatbubbles-outline"></ion-icon>',
@@ -48,6 +47,7 @@ let tasks = [
 		editDate: "",
 		icon: iconsList.idea,
 		active: true,
+		editStatus: false,
 	},
 	{
 		name: "William Gaddis",
@@ -57,6 +57,7 @@ let tasks = [
 		editDate: "",
 		icon: iconsList.quote,
 		active: true,
+		editStatus: false,
 	},
 	{
 		name: "Books",
@@ -66,15 +67,12 @@ let tasks = [
 		editDate: "",
 		icon: iconsList.task,
 		active: true,
+		editStatus: false,
 	},
 ];
-let archiveTasks = []
 let resultFind = [];
-function addArchiveTask() {
-	archiveTasks = tasks.filter(item => item.active == !true)
-}
 function formatText(text) {
-	let newText = text.slice(0, 16) + "..."
+	let newText = text.slice(0, 16)+"...";
 	if (text.length > 20) {
 		return newText
 	}
@@ -82,7 +80,7 @@ function formatText(text) {
 }
 function archivedTask(index) {
 	tasks[index].active = !tasks[index].active
-	if (!tasks[index].active) {
+    if (!tasks[index].active) {
 		fillHtmlList()
 	}
 	if (tasks[index].active) {
@@ -99,45 +97,33 @@ function fillHtmlArchivedList() {
 	});
 }
 let search = () => {
-	return tasks.forEach((item) => {
-		let findTask = tasks.find(item => item.category == "task")
-		let findIdea = tasks.find(item => item.category == "idea")
-		let findQuote = tasks.find(item => item.category == "quote")
-		let findRandomThougth = tasks.find(item => item.category == "randomThougth")
-		if (item.category == "task" && !resultFind.includes(findTask)) {
-			resultFind.push(item)
+    return tasks.forEach((task) => {
+        if ( !resultFind.includes( tasks.find(item => item.category == task.category))) {
+			resultFind.push(task)
 		};
-		if (item.category == "idea" && !resultFind.includes(findIdea)) {
-			resultFind.push(item)
-		};
-		if (item.category == "quote" && !resultFind.includes(findQuote)) {
-			resultFind.push(item)
-		};
-		if (item.category == "randomThougth" && !resultFind.includes(findRandomThougth)) {
-			resultFind.push(item)
-		};
-	})
+       })
 }
-function Task(content, category, editDate = "", name, icon, active = true) {
-	this.name = name;
+function Task(content, category, editDate = "", name, icon, active = true, editStatus=false) {
+    this.name = name;
 	this.content = content;
 	this.created = new Date;
 	this.category = category;
 	this.editDate = editDate;
 	this.icon = icon;
 	this.active = active;
+	this.editStatus=editStatus;
 }
 function transformDate(date) {
-	let month = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'Sep', 'Oct', 'Nov', 'Dec']
-	let newDate = new Date(Date.parse(date))
+	let month = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'Sep', 'Oct', 'Nov', 'Dec'];
+	let newDate = new Date(Date.parse(date));
 	return month[newDate.getMonth()] + ' ' + newDate.getDate() + " " + newDate.getFullYear()
 }
 function searchTasksLength(category, active) {
-	let result = tasks.filter(item => item.category == category && item.active == active).length
-	return result
+	let result = tasks.filter(item => item.category == category && item.active == active).length;
+    return result
 }
 function createFooterTamplate(task) {
-	let actTask = searchTasksLength(task.category, true)
+    let actTask = searchTasksLength(task.category, true)
 	let archiTask = searchTasksLength(task.category, false)
 	return `
 	    <div class="footer-item">
@@ -149,21 +135,18 @@ function createFooterTamplate(task) {
 						<div class="active">${actTask}</div>
 						<div class="archived">${archiTask}</div>
 					</div>
-					
-			</div>
+				</div>
 	    `
 }
 function addFooterContent() {
 	footerContent.innerHTML = "";
-	resultFind.forEach((item) => {
+    resultFind.forEach((item) => {
 		footerContent.innerHTML += createFooterTamplate(item)
-
-	})
-
+     })
 }
 const createTemplate = (task, index) => {
-	let content = formatText(task.content)
-	return `
+    let content=formatText(task.content)
+    return `
 	<div class="todo-item">
 	    <div class="item-name">
 			<div class="item-icon">${task.icon}</div>
@@ -191,25 +174,24 @@ const createTemplate = (task, index) => {
     </div>
 	`
 }
-
 function editTask(index) {
-	let editStatus = tasks[index].editStatus
-	if (!editStatus) {
-		let newContent = (document.getElementById("item-content" + index))
-		newContent.innerHTML = ` <input   id="inputValue" value="${tasks[index].content}">`
-		tasks[index].editStatus = !tasks[index].editStatus
+    let editStatus = tasks[index].editStatus
+    if (!editStatus) {
+		let newContent = (document.getElementById("item-content" + index));
+        newContent.innerHTML = ` <input   id="inputValue" value="${tasks[index].content}">`;
+		tasks[index].editStatus = !tasks[index].editStatus;
 	}
 	if (editStatus) {
-		addNewTaskText(index)
-		tasks[index].editStatus = !tasks[index].editStatus
+		addNewTaskText(index);
+		tasks[index].editStatus = !tasks[index].editStatus;
 	}
 }
 function addNewTaskText(index) {
-	let newText = (document.getElementById("inputValue"))
-	tasks[index].content = newText.value
-	tasks[index].editDate = transformDate(tasks[index].created) + " ," + transformDate(new Date)
-	newText.value = ""
-	fillHtmlList()
+	let newText = (document.getElementById("inputValue"));
+    tasks[index].content = newText.value;
+	tasks[index].editDate = transformDate(tasks[index].created) + " ," + transformDate(new Date);
+	newText.value = "";
+	fillHtmlList();
 }
 function fillHtmlList() {
 	todosList.innerHTML = " ";
@@ -229,8 +211,6 @@ addTaskBtn.addEventListener('click', () => {
 	fillHtmlList();
 	search();
 	addFooterContent();
-	console.log(tasks.filter(item => item.category == "task").length);
-	console.log(tasks)
 })
 function createNewNote() {
 	addTodoWrapper.hidden = !addTodoWrapper.hidden;
@@ -244,14 +224,14 @@ createNoteBtn.addEventListener('click', () => {
 	createNewNote()
 })
 showArchived.addEventListener("click", () => {
-	visibleArchive.visible = !visibleArchive.visible
+    visibleArchive.visible = !visibleArchive.visible
 	if (visibleArchive.visible) {
 		fillHtmlArchivedList();
-		showArchived.className = "header-archive-btn-black"
+        showArchived.className="header-archive-btn-black"
 	}
 	else {
 		fillHtmlList()
-		showArchived.className = "header-archive-btn"
+        showArchived.className="header-archive-btn"
 	}
 })
 search()
